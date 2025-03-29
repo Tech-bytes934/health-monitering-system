@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheCare - Login & Signup</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header (from existing SheCare UI) -->
+    <header>
+        <div class="logo">SheCare</div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">Health Articles</a></li>
+                <li><a href="login.html" class="btn">Login/Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Login/Signup Section -->
+    <div class="container">
+        <div class="form-box">
+            <h1 class="title">Welcome to SheCare</h1>
+            <p class="subtitle">Empowering Women's Health & Wellness</p>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <p class="switch-form">New here? <a href="#" id="show-signup">Create an account</a></p>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signup-form" class="hidden">
+                <input type="text" id="signup-name" placeholder="Full Name" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+                <p class="switch-form">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Health Topics</a>
+        </div>
+        <p>&copy; 2025 SheCare | Women's Wellness Platform</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

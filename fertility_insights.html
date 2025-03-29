@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertility Tracker - SheCare</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #E6E6FA, #D8BFD8);
+            font-family: 'Poppins', sans-serif;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #4B0082;
+        }
+        label {
+            font-weight: 600;
+            color: #4B0082;
+        }
+        .form-control {
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .btn-primary {
+            width: 100%;
+            background: #6A5ACD;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background: #483D8B;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-purple fw-bold" href="#">SheCare</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('menstrual') }}">Period Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('fertility_insights') }}">Fertility Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('health_recommendations') }}">Health Recommendations</a></li>                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="container text-center mt-5">
+        <h2><i class="fa-solid fa-heart-pulse"></i> AI-Powered Fertility Tracker</h2>
+        <p class="text-muted">Track your cycle & fertility with AI insights.</p>
+    </div>
+
+    <!-- Fertility Form -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="glassmorphism">
+                    <form id="fertilityForm">
+                        <div class="mb-3">
+                            <label>Last Period Start Date:</label>
+                            <input type="date" class="form-control" id="periodDate">
+                            <small class="error">Please enter a valid date.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Average Cycle Length (days):</label>
+                            <input type="number" class="form-control" id="cycleLength" min="21" max="35">
+                            <small class="error">Enter a number between 21-35.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Stress Level (1-10):</label>
+                            <input type="number" class="form-control" id="stressLevel" min="1" max="10">
+                            <small class="error">Enter a number between 1-10.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Symptoms (e.g., cramps, fatigue, acne):</label>
+                            <input type="text" class="form-control" id="symptoms">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Mood Changes (e.g., anxiety, happiness):</label>
+                            <input type="text" class="form-control" id="mood">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Pain Level (1-10):</label>
+                            <input type="number" class="form-control" id="painLevel" min="1" max="10">
+                            <small class="error">Enter a number between 1-10.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Are you pregnant? (Yes/No):</label>
+                            <select class="form-control" id="pregnancy">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <small class="error">Please select an option.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Get AI Insights <i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5 py-3 text-muted">
+        <small>&copy; 2025 SheCare. All Rights Reserved.</small>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById("fertilityForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    let isValid = true;
+    document.querySelectorAll(".error").forEach(e => e.style.display = "none");
+
+    let periodDate = document.getElementById("periodDate").value;
+    if (!periodDate) {
+        document.getElementById("periodDate").nextElementSibling.style.display = "block";
+        isValid = false;
+    }
+
+    let cycleLength = document.getElementById("cycleLength").value;
+    if (cycleLength < 21 || cycleLength > 35) {
+        document.getElementById("cycleLength").nextElementSibling.style.display = "block";
+        isValid = false;
+    }
+
+    let stressLevel = document.getElementById("stressLevel").value;
+    if (stressLevel < 1 || stressLevel > 10) {
+        document.getElementById("stressLevel").nextElementSibling.style.display = "block";
+        isValid = false;
+    }
+
+    let painLevel = document.getElementById("painLevel").value;
+    if (painLevel < 1 || painLevel > 10) {
+        document.getElementById("painLevel").nextElementSibling.style.display = "block";
+        isValid = false;
+    }
+
+    let pregnancy = document.getElementById("pregnancy").value;
+    if (!pregnancy) {
+        document.getElementById("pregnancy").nextElementSibling.style.display = "block";
+        isValid = false;
+    }
+
+    if (isValid) {
+        trackFertility();
+    }
+});
+
+function trackFertility() {
+    let cycleLength = document.getElementById("cycleLength").value;
+    let lastPeriodDate = document.getElementById("periodDate").value;
+    let stressLevel = document.getElementById("stressLevel").value;
+
+    if (!cycleLength || !lastPeriodDate || !stressLevel) {
+        alert("Please enter all required fields.");
+        return;
+    }
+
+    fetch("http://127.0.0.1:5000/predict", { // Ensure correct Flask API endpoint
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            lastPeriod: lastPeriodDate,
+            cycleLength: parseInt(cycleLength),
+            stressLevel: parseInt(stressLevel)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(`Fertility Window: ${data.fertilityWindow[0]} - ${data.fertilityWindow[1]}`);
+    })
+    .catch(error => console.error("Error:", error));
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

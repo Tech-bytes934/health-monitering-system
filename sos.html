@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheCare SOS & AI Health Assistant</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(to right, #f3e6fa, #e8d5f7);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+
+        .card {
+            border-radius: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 2rem;
+            color: #6a0dad;
+        }
+
+        .btn-purple {
+            background: #6a0dad;
+            color: white;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-purple:hover {
+            background: #550d8a;
+        }
+
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary fw-bold">🚨 SheCare SOS & AI Health Assistant</h2>
+
+    <div class="row mt-4">
+        <!-- AI-Powered Symptom Checker -->
+        <div class="col-md-4">
+            <div class="card p-3 text-center" onclick="checkSymptoms()">
+                <i class="fa-solid fa-stethoscope icon"></i>
+                <h5 class="mt-3">AI Symptom Checker</h5>
+                <p class="text-muted">Check for PCOS, infections, or hormonal imbalances.</p>
+                <button class="btn btn-purple w-100">Check Symptoms</button>
+            </div>
+        </div>
+
+        <!-- SOS Emergency -->
+        <div class="col-md-4">
+            <div class="card p-3 text-center" onclick="activateSOS()">
+                <i class="fa-solid fa-triangle-exclamation icon"></i>
+                <h5 class="mt-3">Emergency SOS</h5>
+                <p class="text-muted">One-tap SOS for critical situations.</p>
+                <button class="btn btn-danger w-100">Activate SOS</button>
+            </div>
+        </div>
+
+        <!-- Health Tracking -->
+        <div class="col-md-4">
+            <div class="card p-3 text-center" onclick="trackVitals()">
+                <i class="fa-solid fa-heart-pulse icon"></i>
+                <h5 class="mt-3">Health Tracking</h5>
+                <p class="text-muted">Monitor heart rate, BP & stress levels.</p>
+                <button class="btn btn-purple w-100">Track Vitals</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Health Chatbot -->
+    <div class="card mt-5 p-4">
+        <h4 class="text-center text-primary">🤖 AI Health Chatbot</h4>
+        <div class="chat-box" id="chat-box">
+            <p><strong>AI:</strong> Hello! Ask me anything about women's health, PCOS, fertility, or emergencies.</p>
+        </div>
+        <div class="input-group mt-3">
+            <input type="text" id="user-input" class="form-control" placeholder="Type your question...">
+            <button class="btn btn-purple" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script>
+    function activateSOS() {
+        alert("🚨 SOS Activated! Emergency contacts have been notified.");
+        fetch('/send_sos_alert', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error("Error sending SOS alert:", error));
+    }
+
+    function checkSymptoms() {
+        let symptoms = prompt("Enter your symptoms (comma-separated):");
+        if (!symptoms) return;
+        
+        fetch('/predict_condition', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ symptoms: symptoms.split(",") })
+        })
+        .then(response => response.json())
+        .then(data => alert(`Predicted Condition: ${data.condition}`))
+        .catch(error => console.error("Error predicting condition:", error));
+    }
+
+    function trackVitals() {
+        fetch('/track_vitals')
+        .then(response => response.json())
+        .then(data => alert(`Heart Rate: ${data.heart_rate}, BP: ${data.bp}, SpO2: ${data.oxygen_level}, Stress: ${data.stress_level}`))
+        .catch(error => console.error("Error tracking vitals:", error));
+    }
+
+    function sendMessage() {
+        let input = document.getElementById("user-input").value;
+        let chatBox = document.getElementById("chat-box");
+
+        if (input.trim() === "") return;
+
+        chatBox.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+
+        fetch('/ai_chatbot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: input })
+        })
+        .then(response => response.json())
+        .then(data => {
+            chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        })
+        .catch(error => console.error("Error with AI chatbot:", error));
+
+        document.getElementById("user-input").value = "";
+    }
+</script>
+
+</body>
+</html>

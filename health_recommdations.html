@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Recommendations - SheCare</title>
+    
+    <!-- Bootstrap & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+
+    <style>
+        body {
+            background: linear-gradient(to right, #f3e7ff, #e3c6ff);
+            font-family: 'Poppins', sans-serif;
+        }
+        .text-purple {
+            color: #6a0dad;
+        }
+        .btn-purple {
+            background-color: #6a0dad;
+            color: white;
+            transition: 0.3s;
+        }
+        .btn-purple:hover {
+            background-color: #4c087f;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin: auto;
+        }
+        .form-control {
+            border-radius: 10px;
+            height: 45px;
+        }
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-purple fw-bold" href="#">SheCare</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('period_tracker') }}">Period Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('fertility_insights') }}">Fertility Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('health_recommendations') }}">Health Recommendations</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="container text-center mt-5">
+        <h2 class="text-purple fw-bold animated fadeInDown">Health Recommendations</h2>
+        <p class="text-muted">Get personalized wellness tips based on your lifestyle & cycle.</p>
+    </div>
+
+    <!-- Health Input Form -->
+    <div class="glassmorphism mt-4">
+        <h4 class="text-purple fw-bold text-center">Enter Your Details</h4>
+        <form id="healthForm">
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input type="number" id="age" class="form-control" placeholder="Enter your age" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Activity Level</label>
+                <select id="activityLevel" class="form-control">
+                    <option>Low</option>
+                    <option>Moderate</option>
+                    <option>High</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Dietary Preferences</label>
+                <select id="dietPreference" class="form-control">
+                    <option>Vegetarian</option>
+                    <option>Non-Vegetarian</option>
+                    <option>Vegan</option>
+                    <option>Balanced</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Health Concerns (Optional)</label>
+                <textarea id="healthConcerns" class="form-control" placeholder="E.g., PCOS, anemia, fatigue"></textarea>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-purple btn-lg mt-3 shadow-sm" onclick="generateRecommendations()">Get Recommendations</button>
+            </div>
+        </form>
+
+        <!-- Recommendations -->
+        <div class="mt-4 p-3 text-center" id="recommendationContainer" style="display: none;">
+            <h5 class="text-purple">Your Personalized Health Tips:</h5>
+            <p id="recommendations" class="fw-bold"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5 py-3 text-muted">
+        <small>&copy; 2025 SheCare. All Rights Reserved.</small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        function generateRecommendations() {
+            let age = parseInt(document.getElementById("age").value);
+            let activityLevel = document.getElementById("activityLevel").value;
+            let dietPreference = document.getElementById("dietPreference").value;
+            let healthConcerns = document.getElementById("healthConcerns").value;
+
+            if (!age || !activityLevel || !dietPreference) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let tips = [];
+
+            // Age-based recommendations
+            if (age < 25) {
+                tips.push("Focus on a balanced diet rich in proteins and healthy fats.");
+            } else if (age >= 25 && age <= 35) {
+                tips.push("Maintain hormonal balance with whole grains and healthy carbs.");
+            } else {
+                tips.push("Ensure enough calcium and vitamin D intake for bone health.");
+            }
+
+            // Activity-based recommendations
+            if (activityLevel === "Low") {
+                tips.push("Try light yoga or daily walks for at least 30 minutes.");
+            } else if (activityLevel === "Moderate") {
+                tips.push("Maintain a mix of strength training and cardio.");
+            } else {
+                tips.push("Stay hydrated and consume adequate protein post-workout.");
+            }
+
+            // Diet-based recommendations
+            if (dietPreference === "Vegan") {
+                tips.push("Ensure enough plant-based protein like lentils and quinoa.");
+            } else if (dietPreference === "Vegetarian") {
+                tips.push("Include dairy and nuts for balanced nutrition.");
+            } else if (dietPreference === "Non-Vegetarian") {
+                tips.push("Lean meats and fish can support muscle recovery.");
+            }
+
+            // Health concerns
+            if (healthConcerns.includes("PCOS")) {
+                tips.push("Reduce sugar intake and eat fiber-rich foods.");
+            } else if (healthConcerns.includes("anemia")) {
+                tips.push("Consume iron-rich foods like spinach and lentils.");
+            }
+
+            document.getElementById("recommendations").innerText = tips.join("\n");
+            document.getElementById("recommendationContainer").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
