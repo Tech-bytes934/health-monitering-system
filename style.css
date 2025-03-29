@@ -1,0 +1,339 @@
+/* Global Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f0ff; /* Soft Lavender */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings Styling */
+h1, h2, h3 {
+    color: #7d29a6; /* Rich Lavender */
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #a076c0, #d6a3f7); /* Soft Purple Gradient */
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #e6c5ff;
+}
+
+/* Hero Section */
+.hero {
+    background: url('your-image.jpg') center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    background: linear-gradient(90deg, #a076c0, #d6a3f7);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+}
+
+.btn:hover {
+    background: #b97be4;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 50px 20px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #7d29a6;
+    color: white;
+}
+
+.footer a {
+    color: #e6c5ff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #f3d9ff;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+    }
+
+    .hero-text {
+        font-size: 18px;
+    }
+
+    .navbar {
+        text-align: center;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+/* Soft Purple Theme */
+:root {
+    --soft-purple: #b26ee2; /* Light Lavender */
+    --hover-purple:  #b26ee2; /* Slightly darker */
+}
+
+/* Login/Signup Button */
+.navbar .btn-primary {
+    background-color: var(--soft-purple)(var(--hover-purple));
+    border-color: var(--soft-purple)(var(--hover-purple));
+}
+
+.navbar .btn-primary:hover {
+    background-color: var(--hover-purple);
+    border-color: var(--hover-purple);
+}
+
+/* More Button */
+.navbar .btn-outline-primary {
+    color: var(--soft-purple) var(--hover-purple);
+    border-color: var(--soft-purple)var(--hover-purple);
+}
+
+.navbar .btn-outline-primary:hover {
+    background-color: var(--soft-purple) var(--hover-purple);
+    color: white;
+}
+:root {
+    --danger-red: #ff4d4d;
+}
+
+/* Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+/* Color Theme */
+:root {
+    --soft-purple: #B19CD9;
+    --deep-purple: #6A0572;
+    --light-lavender: #F4E1FF;
+    --soft-pink: #FFB6C1;
+    --dark-purple: #4B0082;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-lavender);
+}
+
+.sos-section {
+    background: var(--light-lavender);
+    border-radius: 10px;
+}
+
+.vital-card {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.bg-soft-pink {
+    background: var(--soft-pink);
+}
+
+.bg-soft-purple {
+    background: var(--soft-purple);
+}
+
+.bg-light-lavender {
+    background: var(--light-lavender);
+}
+
+.text-deep-purple {
+    color: var(--deep-purple);
+}
+
+.text-dark-purple {
+    color: var(--dark-purple);
+}
+
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.feature-box i {
+    margin-bottom: 10px;
+}
+
+.btn-deep-purple {
+    background: var(--deep-purple);
+    color: white;
+    border: none;
+}
+
+.btn-deep-purple:hover {
+    background: var(--dark-purple);
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(106, 5, 114, 0.8); }
+    50% { box-shadow: 0 0 20px rgba(106, 5, 114, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(106, 5, 114, 0.8); }
+}
+:root {
+    --deep-purple: #6A0572;
+    --soft-pink: #FFB6C1;
+    --soft-purple: #B19CD9;
+    --soft-teal: #72C2C2;
+    --light-lavender: #F4E1FF;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-lavender);
+}
+
+.bg-gradient-pink { background: linear-gradient(135deg, #FF6F91, #FFC1E3); }
+.bg-gradient-purple { background: linear-gradient(135deg, #6A0572, #B19CD9); }
+.bg-gradient-blue { background: linear-gradient(135deg, #007BFF, #66CCFF); }
+.bg-gradient-teal { background: linear-gradient(135deg, #00A896, #72C2C2); }
+
+.text-deep-purple { color: var(--deep-purple); }
+.about-shecare {
+    background: linear-gradient(to right, #f3e6fa, #e8d5f7);
+    padding: 80px 0;
+}
+
+.about-shecare h2 {
+    color: #6a0dad; 
+    font-size: 2rem;
+}
+
+.about-shecare p {
+    font-size: 1.1rem;
+    max-width: 800px;
+}
+
+.features-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    font-size: 1.1rem;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-icon {
+    color: #6a0dad;
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background: #6a0dad;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #550d8a;
+}
+body {
+    background: linear-gradient(to right, #e6e6fa, #d8bfd8);
+    font-family: 'Poppins', sans-serif;
+}
+.text-purple {
+    color: #d55ac5;
+}
+.bg-purple {
+    background-color: #e271ce;
+}
+.btn-purple {
+    background-color: #e85ee1;
+    color: white;
+    border-radius: 25px;
+}
+.btn-purple:hover {
+    background-color: #f465f7;
+    transform: scale(1.05);
+}
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
